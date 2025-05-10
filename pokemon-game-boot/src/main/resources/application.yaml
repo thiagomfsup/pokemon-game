@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: pokemon-game
+  codec:
+    max-in-memory-size: 2MB
+
+pokemon-game:
+  pokeapi-client:
+    base-url: "https://pokeapi.co/api/v2"
+    limit-per-url: 100
