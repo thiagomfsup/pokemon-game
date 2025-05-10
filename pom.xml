@@ -25,7 +25,19 @@
 
 	<properties>
 		<java.version>21</java.version>
+		<instancio.version>5.4.0</instancio.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.instancio</groupId>
+				<artifactId>instancio-junit</artifactId>
+				<version>${instancio.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
@@ -72,7 +84,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 
