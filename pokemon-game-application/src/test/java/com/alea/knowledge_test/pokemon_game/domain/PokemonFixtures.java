@@ -30,4 +30,11 @@ public class PokemonFixtures {
                 .limit(limit)
                 .toList();
     }
+
+    public static List<Pokemon> pokemonsRankedByBaseExperience(int limit) {
+        return POKEMONS.stream()
+                .sorted(Comparator.comparingInt(Pokemon::baseExperience).reversed())
+                .limit(limit)
+                .toList();
+    }
 }

@@ -1,5 +1,6 @@
 package com.alea.knowledge_test.pokemon_game.rest.controller;
 
+import com.alea.knowledge_test.pokemon_game.application.ranking.BaseExperienceRankingCriteria;
 import com.alea.knowledge_test.pokemon_game.application.request.GetPokemonByRankingRequest;
 import com.alea.knowledge_test.pokemon_game.application.ranking.HeaviestRankingCriteria;
 import com.alea.knowledge_test.pokemon_game.application.ranking.HighestRakingCriteria;
@@ -42,6 +43,13 @@ public class PokemonController {
     @GetMapping(value = "/pokemon", params = "heaviest")
     public GetPokemonByRankingResponse heaviestPokemons() {
         final var request = new GetPokemonByRankingRequest(new HeaviestRankingCriteria(), 5);
+
+        return getPokemonByRanking.getPokemonByRanking(request);
+    }
+
+    @GetMapping(value = "/pokemon", params = "base_experience")
+    public GetPokemonByRankingResponse pokemonsRankedByBaseExperience() {
+        final var request = new GetPokemonByRankingRequest(new BaseExperienceRankingCriteria(), 5);
 
         return getPokemonByRanking.getPokemonByRanking(request);
     }

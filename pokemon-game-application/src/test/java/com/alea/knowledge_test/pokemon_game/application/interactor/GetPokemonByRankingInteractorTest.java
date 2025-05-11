@@ -1,5 +1,6 @@
 package com.alea.knowledge_test.pokemon_game.application.interactor;
 
+import com.alea.knowledge_test.pokemon_game.application.ranking.BaseExperienceRankingCriteria;
 import com.alea.knowledge_test.pokemon_game.application.repository.PokemonRepository;
 import com.alea.knowledge_test.pokemon_game.application.request.GetPokemonByRankingRequest;
 import com.alea.knowledge_test.pokemon_game.application.ranking.HeaviestRankingCriteria;
@@ -36,10 +37,10 @@ class GetPokemonByRankingInteractorTest {
 
         // when
         final var request = new GetPokemonByRankingRequest(new HeaviestRankingCriteria(), limit);
-        final var heaviestPokemonResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
+        final var getPokemonByRankingResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
 
         // then
-        assertThat(heaviestPokemonResponse)
+        assertThat(getPokemonByRankingResponse)
                 .isNotNull()
                 .extracting(GetPokemonByRankingResponse::pokemons)
                 .asInstanceOf(InstanceOfAssertFactories.LIST)
@@ -57,16 +58,37 @@ class GetPokemonByRankingInteractorTest {
 
         // when
         final var request = new GetPokemonByRankingRequest(new HighestRakingCriteria(), limit);
-        final var highestPokemonResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
+        final var getPokemonByRankingResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
 
         // then
-        assertThat(highestPokemonResponse)
+        assertThat(getPokemonByRankingResponse)
                 .isNotNull()
                 .extracting(GetPokemonByRankingResponse::pokemons)
                 .asInstanceOf(InstanceOfAssertFactories.LIST)
                 .isNotEmpty()
                 .hasSize(limit)
                 .isEqualTo(expectedHighestPokemons);
+    }
+
+    @Test
+    void shouldReturnListOfPokemonRankedByBaseExperience() {
+        // given
+        final int limit = new Random().nextInt(PokemonFixtures.POKEMONS.size() + 1);
+        final var expectedPokemonsRankedByBaseExperience = PokemonFixtures.pokemonsRankedByBaseExperience(limit);
+        Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
+
+        // when
+        final var request = new GetPokemonByRankingRequest(new BaseExperienceRankingCriteria(), limit);
+        final var getPokemonByRankingResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
+
+        // then
+        assertThat(getPokemonByRankingResponse)
+                .isNotNull()
+                .extracting(GetPokemonByRankingResponse::pokemons)
+                .asInstanceOf(InstanceOfAssertFactories.LIST)
+                .isNotEmpty()
+                .hasSize(limit)
+                .isEqualTo(expectedPokemonsRankedByBaseExperience);
     }
 
 }
