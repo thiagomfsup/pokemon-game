@@ -1,9 +1,8 @@
 package com.alea.knowledge_test.pokemon_game.application.interactor;
 
-
 import com.alea.knowledge_test.pokemon_game.application.repository.PokemonRepository;
-import com.alea.knowledge_test.pokemon_game.application.request.HighestPokemonResponse;
-import com.alea.knowledge_test.pokemon_game.application.response.HighestPokemonRequest;
+import com.alea.knowledge_test.pokemon_game.application.request.HeaviestPokemonRequest;
+import com.alea.knowledge_test.pokemon_game.application.response.HeaviestPokemonResponse;
 import com.alea.knowledge_test.pokemon_game.domain.PokemonFixtures;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
@@ -16,32 +15,33 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-class HighestPokemonInteractorTest {
+class HeaviestPokemonInteractorTest {
 
     @Mock
     private PokemonRepository pokemonRepository;
 
     @InjectMocks
-    private HighestPokemonInteractor highestPokemonInteractor;
+    private HeaviestPokemonInteractor heaviestPokemonInteractor;
 
     @Test
-    void shouldReturnListOfHighestPokemon() {
+    void shouldReturnListOfHeaviestPokemon() {
         // given
-        final var limit = 5;
-        final var expectedHighestPokemons = PokemonFixtures.highestPokemons(limit);
+        final int limit = 5;
+        final var expectedHeaviestPokemons = PokemonFixtures.heaviestPokemons(limit);
         Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
 
         // when
-        final var request = new HighestPokemonRequest(limit);
-        final var highestPokemonResponse = highestPokemonInteractor.highestPokemon(request);
+        final var request = new HeaviestPokemonRequest(limit);
+        final var heaviestPokemonResponse = heaviestPokemonInteractor.heaviestPokemon(request);
 
         // then
-        assertThat(highestPokemonResponse)
+        assertThat(heaviestPokemonResponse)
                 .isNotNull()
-                .extracting(HighestPokemonResponse::pokemons)
+                .extracting(HeaviestPokemonResponse::pokemons)
                 .asInstanceOf(InstanceOfAssertFactories.LIST)
                 .isNotEmpty()
                 .hasSize(limit)
-                .isEqualTo(expectedHighestPokemons);
+                .isEqualTo(expectedHeaviestPokemons);
     }
+
 }

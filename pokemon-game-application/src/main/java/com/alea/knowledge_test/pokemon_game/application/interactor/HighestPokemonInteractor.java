@@ -19,7 +19,7 @@ public class HighestPokemonInteractor implements HighestPokemonUseCase {
     @Override
     public HighestPokemonResponse highestPokemon(HighestPokemonRequest request) {
         final var highestPokemons = pokemonRepository.retrieveAllPokemons().stream()
-                .sorted(Comparator.comparingInt(Pokemon::height))
+                .sorted(Comparator.comparingInt(Pokemon::height).reversed())
                 .limit(5)
                 .toList();
 
