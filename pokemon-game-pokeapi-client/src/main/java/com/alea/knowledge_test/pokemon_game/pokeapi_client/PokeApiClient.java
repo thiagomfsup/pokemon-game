@@ -9,13 +9,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.lang.invoke.MethodHandles;
+import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 
 @Service
 public class PokeApiClient implements PokemonRepository {
@@ -35,7 +38,12 @@ public class PokeApiClient implements PokemonRepository {
     @Override
     public List<Pokemon> retrieveAllPokemons() {
         try {
-            return fetchResources("/pokemon?limit=%d".formatted(limitPerPage), ResourceListDTO.class)
+            return webClient.get().uri(uriBuilder -> uriBuilder
+                            .path("/pokemon")
+                            .queryParam("limit", limitPerPage)
+                            .build())
+                    .retrieve()
+                    .bodyToMono(ResourceListDTO.class)
                     .expand(resourceListDTO -> resourceListDTO.next() == null ? Mono.empty() : fetchResources(resourceListDTO.next(), ResourceListDTO.class))
                     .flatMap(resourceListDTO -> Flux.fromIterable(Objects.requireNonNullElse(resourceListDTO.results(), List.of())))
                     .flatMap(resultDTO -> fetchResources(resultDTO.url(), PokemonDTO.class))
