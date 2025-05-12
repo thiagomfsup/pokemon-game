@@ -1,13 +1,11 @@
 package com.alea.knowledge_test.pokemon_game.rest.controller;
 
-import com.alea.knowledge_test.pokemon_game.application.ranking.BaseExperienceRankingCriteria;
 import com.alea.knowledge_test.pokemon_game.application.request.GetPokemonByRankingRequest;
-import com.alea.knowledge_test.pokemon_game.application.ranking.HeaviestRankingCriteria;
-import com.alea.knowledge_test.pokemon_game.application.ranking.HighestRakingCriteria;
 import com.alea.knowledge_test.pokemon_game.application.response.GetPokemonByRankingResponse;
 import com.alea.knowledge_test.pokemon_game.application.response.PokemonRespose;
 import com.alea.knowledge_test.pokemon_game.application.usecase.GetPokemonByRankingUseCase;
 import com.alea.knowledge_test.pokemon_game.application.usecase.ListPokemonsUseCase;
+import com.alea.knowledge_test.pokemon_game.domain.model.Pokemon;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,21 +33,21 @@ public class PokemonController {
 
     @GetMapping(value = "/pokemon", params = "highest")
     public GetPokemonByRankingResponse highestPokemons() {
-        final var request = new GetPokemonByRankingRequest(new HighestRakingCriteria(), 5);
+        final var request = new GetPokemonByRankingRequest(Pokemon::height, 5);
 
         return getPokemonByRanking.getPokemonByRanking(request);
     }
 
     @GetMapping(value = "/pokemon", params = "heaviest")
     public GetPokemonByRankingResponse heaviestPokemons() {
-        final var request = new GetPokemonByRankingRequest(new HeaviestRankingCriteria(), 5);
+        final var request = new GetPokemonByRankingRequest(Pokemon::weight, 5);
 
         return getPokemonByRanking.getPokemonByRanking(request);
     }
 
     @GetMapping(value = "/pokemon", params = "base_experience")
     public GetPokemonByRankingResponse pokemonsRankedByBaseExperience() {
-        final var request = new GetPokemonByRankingRequest(new BaseExperienceRankingCriteria(), 5);
+        final var request = new GetPokemonByRankingRequest(Pokemon::baseExperience, 5);
 
         return getPokemonByRanking.getPokemonByRanking(request);
     }

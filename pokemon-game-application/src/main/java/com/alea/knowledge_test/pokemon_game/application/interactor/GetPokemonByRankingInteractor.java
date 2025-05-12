@@ -5,6 +5,8 @@ import com.alea.knowledge_test.pokemon_game.application.request.GetPokemonByRank
 import com.alea.knowledge_test.pokemon_game.application.response.GetPokemonByRankingResponse;
 import com.alea.knowledge_test.pokemon_game.application.usecase.GetPokemonByRankingUseCase;
 
+import java.util.Comparator;
+
 public class GetPokemonByRankingInteractor implements GetPokemonByRankingUseCase {
 
     private final PokemonRepository pokemonRepository;
@@ -16,7 +18,7 @@ public class GetPokemonByRankingInteractor implements GetPokemonByRankingUseCase
     @Override
     public GetPokemonByRankingResponse getPokemonByRanking(GetPokemonByRankingRequest getPokemonByRankingRequest) {
         final var pokemonsByRanking = pokemonRepository.retrieveAllPokemons().stream()
-                .sorted(getPokemonByRankingRequest.rankingCriteria().sortCriteria())
+                .sorted(Comparator.comparingInt(getPokemonByRankingRequest.rankingCriteria()).reversed())
                 .limit(getPokemonByRankingRequest.limit())
                 .toList();
 

@@ -1,12 +1,10 @@
 package com.alea.knowledge_test.pokemon_game.application.interactor;
 
-import com.alea.knowledge_test.pokemon_game.application.ranking.BaseExperienceRankingCriteria;
 import com.alea.knowledge_test.pokemon_game.application.repository.PokemonRepository;
 import com.alea.knowledge_test.pokemon_game.application.request.GetPokemonByRankingRequest;
-import com.alea.knowledge_test.pokemon_game.application.ranking.HeaviestRankingCriteria;
-import com.alea.knowledge_test.pokemon_game.application.ranking.HighestRakingCriteria;
 import com.alea.knowledge_test.pokemon_game.application.response.GetPokemonByRankingResponse;
 import com.alea.knowledge_test.pokemon_game.domain.PokemonFixtures;
+import com.alea.knowledge_test.pokemon_game.domain.model.Pokemon;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +34,7 @@ class GetPokemonByRankingInteractorTest {
         Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
 
         // when
-        final var request = new GetPokemonByRankingRequest(new HeaviestRankingCriteria(), limit);
+        final var request = new GetPokemonByRankingRequest(Pokemon::height, limit);
         final var getPokemonByRankingResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
 
         // then
@@ -57,7 +55,7 @@ class GetPokemonByRankingInteractorTest {
         Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
 
         // when
-        final var request = new GetPokemonByRankingRequest(new HighestRakingCriteria(), limit);
+        final var request = new GetPokemonByRankingRequest(Pokemon::height, limit);
         final var getPokemonByRankingResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
 
         // then
@@ -78,7 +76,7 @@ class GetPokemonByRankingInteractorTest {
         Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
 
         // when
-        final var request = new GetPokemonByRankingRequest(new BaseExperienceRankingCriteria(), limit);
+        final var request = new GetPokemonByRankingRequest(Pokemon::baseExperience, limit);
         final var getPokemonByRankingResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
 
         // then
