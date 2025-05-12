@@ -1,0 +1,7 @@
+{"pokemons":[
+  {"id":3,"name":"venusaur","weight":1000,"height":20,"baseExperience":263},
+  {"id":6,"name":"charizard","weight":905,"height":17,"baseExperience":267},
+  {"id":9,"name":"blastoise","weight":855,"height":16,"baseExperience":265},
+  {"id":5,"name":"charmeleon","weight":190,"height":11,"baseExperience":142},
+  {"id":2,"name":"ivysaur","weight":130,"height":10,"baseExperience":142}
+]}

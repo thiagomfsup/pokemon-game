@@ -1,0 +1,27 @@
+{
+  "count": 10,
+  "next": "http://localhost:8081/pokemon?offset=5&limit=5",
+  "previous": null,
+  "results": [
+    {
+      "name": "bulbasaur",
+      "url": "http://localhost:8081/pokemon/1/"
+    },
+    {
+      "name": "ivysaur",
+      "url": "http://localhost:8081/pokemon/2/"
+    },
+    {
+      "name": "venusaur",
+      "url": "http://localhost:8081/pokemon/3/"
+    },
+    {
+      "name": "charmander",
+      "url": "http://localhost:8081/pokemon/4/"
+    },
+    {
+      "name": "charmeleon",
+      "url": "http://localhost:8081/pokemon/5/"
+    }
+  ]
+}

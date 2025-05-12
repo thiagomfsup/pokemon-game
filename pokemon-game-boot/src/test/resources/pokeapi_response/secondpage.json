@@ -1,0 +1,27 @@
+{
+  "count": 10,
+  "next": null,
+  "previous": "http://localhost:8081/pokemon?offset=0&limit=5",
+  "results": [
+    {
+      "name": "charizard",
+      "url": "http://localhost:8081/pokemon/6/"
+    },
+    {
+      "name": "squirtle",
+      "url": "http://localhost:8081/pokemon/7/"
+    },
+    {
+      "name": "wartortle",
+      "url": "http://localhost:8081/pokemon/8/"
+    },
+    {
+      "name": "blastoise",
+      "url": "http://localhost:8081/pokemon/9/"
+    },
+    {
+      "name": "caterpie",
+      "url": "http://localhost:8081/pokemon/10/"
+    }
+  ]
+}
