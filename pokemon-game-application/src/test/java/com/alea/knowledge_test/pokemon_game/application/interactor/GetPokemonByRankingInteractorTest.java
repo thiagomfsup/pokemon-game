@@ -29,12 +29,12 @@ class GetPokemonByRankingInteractorTest {
     @Test
     void shouldReturnListOfHeaviestPokemon() {
         // given
-        final int limit = new Random().nextInt(PokemonFixtures.POKEMONS.size() + 1);
+        final int limit = new Random().nextInt(1, PokemonFixtures.POKEMONS.size());
         final var expectedHeaviestPokemons = PokemonFixtures.heaviestPokemons(limit);
         Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
 
         // when
-        final var request = new GetPokemonByRankingRequest(Pokemon::height, limit);
+        final var request = new GetPokemonByRankingRequest(Pokemon::weight, limit);
         final var getPokemonByRankingResponse = getPokemonByRankingInteractor.getPokemonByRanking(request);
 
         // then
@@ -50,7 +50,7 @@ class GetPokemonByRankingInteractorTest {
     @Test
     void shouldReturnListOfHighestPokemon() {
         // given
-        final int limit = new Random().nextInt(PokemonFixtures.POKEMONS.size() + 1);
+        final int limit = new Random().nextInt(1, PokemonFixtures.POKEMONS.size());
         final var expectedHighestPokemons = PokemonFixtures.highestPokemons(limit);
         Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
 
@@ -71,7 +71,7 @@ class GetPokemonByRankingInteractorTest {
     @Test
     void shouldReturnListOfPokemonRankedByBaseExperience() {
         // given
-        final int limit = new Random().nextInt(PokemonFixtures.POKEMONS.size() + 1);
+        final int limit = new Random().nextInt(1, PokemonFixtures.POKEMONS.size());
         final var expectedPokemonsRankedByBaseExperience = PokemonFixtures.pokemonsRankedByBaseExperience(limit);
         Mockito.when(pokemonRepository.retrieveAllPokemons()).thenReturn(PokemonFixtures.POKEMONS);
 
