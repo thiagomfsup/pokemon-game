@@ -81,7 +81,7 @@ public class PokemonGameIT {
         final var highestAsString = Files.readString(ResourceUtils
                 .getFile("classpath:pokeapi_response/highest.json").toPath());
 
-        mvc.perform(get("/api/v1/pokemon?highest").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v1/pokemon/top/height").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(highestAsString));
@@ -92,7 +92,7 @@ public class PokemonGameIT {
         final var heaviestAsString = Files.readString(ResourceUtils
                 .getFile("classpath:pokeapi_response/heaviest.json").toPath());
 
-        mvc.perform(get("/api/v1/pokemon?heaviest").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v1/pokemon/top/weight").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(heaviestAsString));
@@ -103,7 +103,7 @@ public class PokemonGameIT {
         final var baseExperienceRankingAsString = Files.readString(ResourceUtils
                 .getFile("classpath:pokeapi_response/baseExperienceRanking.json").toPath());
 
-        mvc.perform(get("/api/v1/pokemon?base_experience").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/v1/pokemon/top/base_experience").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(baseExperienceRankingAsString));

@@ -31,21 +31,21 @@ public class PokemonController {
         return listPokemonsUseCase.listPokemons();
     }
 
-    @GetMapping(value = "/pokemon", params = "highest")
+    @GetMapping(value = "/pokemon/top/height")
     public GetPokemonByRankingResponse highestPokemons() {
         final var request = new GetPokemonByRankingRequest(Pokemon::height, 5);
 
         return getPokemonByRanking.getPokemonByRanking(request);
     }
 
-    @GetMapping(value = "/pokemon", params = "heaviest")
+    @GetMapping(value = "/pokemon/top/weight")
     public GetPokemonByRankingResponse heaviestPokemons() {
         final var request = new GetPokemonByRankingRequest(Pokemon::weight, 5);
 
         return getPokemonByRanking.getPokemonByRanking(request);
     }
 
-    @GetMapping(value = "/pokemon", params = "base_experience")
+    @GetMapping(value = "/pokemon/top/base_experience")
     public GetPokemonByRankingResponse pokemonsRankedByBaseExperience() {
         final var request = new GetPokemonByRankingRequest(Pokemon::baseExperience, 5);
 
