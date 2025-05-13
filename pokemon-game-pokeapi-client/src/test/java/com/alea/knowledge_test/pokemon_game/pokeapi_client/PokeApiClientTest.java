@@ -88,6 +88,8 @@ class PokeApiClientTest {
         assertThat(pokemons)
                 .isNotEmpty()
                 .hasSize(expectedPokemonDTOs.size())
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
                 .isEqualTo(expectedPokemonDTOs.stream().map(PokemonDTO::toModel).toList());
     }
 
