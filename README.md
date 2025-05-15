@@ -86,3 +86,4 @@ mvn clean install
 
 # Run the application
 java -jar pokemon-game-boot/target/pokemon-game-boot-0.0.1-SNAPSHOT.jar
+```
